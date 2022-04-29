@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Edit Or Delete Post</h1>
+    </div>
+    <div class="post my-4">
+        <div class="row" *ngIf="post">
+          <form #form="ngForm" (ngSubmit)="onSubmit()" [formGroup]="UpdatePostForm">
+            <div class="mb-3">
+              <label  class="form-label">title</label>
+              <input formControlName="title" [ngClass]="{ 'is-invalid': submitted && UpdatePostForm.controls.title.errors }" type="text" class="form-control" name="title" [(ngModel)]="post.title">
+              <div *ngIf="submitted && UpdatePostForm.controls.title.errors" class="text-danger">
+                <div *ngIf="UpdatePostForm.controls.title.errors.required">
+                  Title is required
+
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Body</label>
+              <textarea formControlName="body" [ngClass]="{ 'is-invalid': submitted && UpdatePostForm.controls.body.errors }" rows="3" cols="80" class="form-control" name="body" [(ngModel)]="post.body"></textarea>
+                <div *ngIf="submitted && UpdatePostForm.controls.body.errors" class="text-danger">
+                  <div *ngIf="UpdatePostForm.controls.body.errors.required">
+                    Body is required
+                  </div>
+              </div>
+            </div>
+                            <button type="submit" class="btn btn-success mx-2">Update Post</button>
+                <button type="submit" class="btn btn-danger mx-2" (click)="deletePost()">Delete Post</button>
+        </form>
+        </div>
+    </div>
+</div>
